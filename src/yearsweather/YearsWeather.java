@@ -8,6 +8,7 @@ package yearsweather;
 import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -67,31 +68,8 @@ public class YearsWeather {
             }
             System.out.println();
         }
-//            for(int j = 0; j < dayTempInYear[i].length; j++) {
-//                if(i == 11 || i == 0 || i == 1) {
-//                    min = -30;
-//                    max = 0;
-//                }else if(i == 2 || i == 3 || i == 4){
-//                    min = -5;
-//                    max = 15;
-//                }else if(i == 5 || i == 6 || i == 7){
-//                    min = 5;
-//                    max = 30;
-//                }else if(i == 8 || i == 9 || i == 10){
-//                    min = -10;
-//                    max = 10;
-//                }
-//                dayTempInYear[i][j] = random.nextInt(max - min + 1)+min;
-//            }
-//        }
-//        for(int i = 0; i < dayTempInYear.length; i++) {
-////            System.out.println(Arrays.toString(dayTempInYear[i]));
-//            for(int j = 0; j < dayTempInYear[i].length; j++) {
-//                System.out.printf("%4d", dayTempInYear[i][j]);
-//            }
-//            System.out.println();
-//        }
         //Средняя арифметическая каждого месяца
+        
         double[] averageTemperatureInMonth = new double[12];
         for(int i = 0; i < dayTempInYear.length; i++) {
             int daysInMonth=0;
@@ -104,46 +82,33 @@ public class YearsWeather {
         System.out.println("Средняя температура по месяцам: ");
         for(int i = 0; i < averageTemperatureInMonth.length; i++) {
             System.out.printf("%s: %-4.2f%n",Month.values()[i], averageTemperatureInMonth[i]);
-//            switch (i) {
-//                case 0:
-//                    System.out.printf("Январь: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 1:
-//                    System.out.printf("Февраль: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 2:
-//                    System.out.printf("Март: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 3:
-//                    System.out.printf("Апрель: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 4:
-//                    System.out.printf("Май: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 5:
-//                    System.out.printf("Июнь: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 6:
-//                    System.out.printf("Июль: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 7:
-//                    System.out.printf("Август: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 8:
-//                    System.out.printf("Сентябрь: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 9:
-//                    System.out.printf("Октябрь: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 10:
-//                    System.out.printf("Ноябрь: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//                case 11:
-//                    System.out.printf("Декабрь: %-4.2f%n",averageTemperatureInMonth[i]);
-//                    break;
-//            }
-            
         }
+        // Погода на указанную дату
+        String[] MonthsStr = {"января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"};
+        System.out.print("Введите день: ");
+        Scanner scanner = new Scanner(System.in);
+        int day = scanner.nextInt();
+        System.out.print("Введите число месяца: ");
+        int month = scanner.nextInt();
+        System.out.println(day + " " + MonthsStr[month-1] + " погода составляла " + dayTempInYear[month-1][day-1] + " °C");
+        
+        // Самая теплая и холодная температура
+        
+        int maximum_temperature = 0;
+        int minimum_temperature = 0;
+        int index = 0;
+        for(int i = 0; i < dayTempInYear.length; i++) {
+            for(int j = 0; j < dayTempInYear[i].length; j++) {
+                if(dayTempInYear[i][j] > maximum_temperature) {
+                    maximum_temperature = dayTempInYear[i][j];
+                    index = j;
+                }
+                if(dayTempInYear[i][j] < minimum_temperature) {
+                    minimum_temperature = dayTempInYear[i][j];
+                }
+            }
+        }
+        System.out.println("Максимальная температура составляет: " + maximum_temperature + " °C");
+        System.out.println("Минимальная температура составляет: " + minimum_temperature + " °C");
     }
-    
 }
