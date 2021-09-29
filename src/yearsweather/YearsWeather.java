@@ -96,19 +96,25 @@ public class YearsWeather {
         
         int maximum_temperature = 0;
         int minimum_temperature = 0;
-        int index = 0;
+        int daymaxtemp = 0;
+        int monthmaxtemp = 0;
+        int daymintemp = 0;
+        int monthmintemp = 0;
         for(int i = 0; i < dayTempInYear.length; i++) {
             for(int j = 0; j < dayTempInYear[i].length; j++) {
                 if(dayTempInYear[i][j] > maximum_temperature) {
                     maximum_temperature = dayTempInYear[i][j];
-                    index = j;
+                    daymaxtemp = j;
+                    monthmaxtemp = i;
                 }
                 if(dayTempInYear[i][j] < minimum_temperature) {
                     minimum_temperature = dayTempInYear[i][j];
+                    daymintemp = j;
+                    monthmintemp = i;
                 }
             }
         }
-        System.out.println("Максимальная температура составляет: " + maximum_temperature + " °C");
-        System.out.println("Минимальная температура составляет: " + minimum_temperature + " °C");
+        System.out.println("Максимальная температура составляет: " + maximum_temperature + " °C" + " и была она " + daymaxtemp + " " + MonthsStr[monthmaxtemp]);
+        System.out.println("Минимальная температура составляет: " + minimum_temperature + " °C" + " и была она " + daymintemp + " " + MonthsStr[monthmintemp]);
     }
 }
